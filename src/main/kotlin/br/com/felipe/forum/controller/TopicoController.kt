@@ -7,6 +7,7 @@ import br.com.felipe.forum.service.TopicoService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -33,6 +34,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
+    @Transactional
     fun cadastrar(
         @RequestBody @Valid form: TopicoForm,
         uriBuilder: UriComponentsBuilder): ResponseEntity<TopicoView>{
@@ -42,12 +44,14 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PutMapping
+    @Transactional
     fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm): ResponseEntity<TopicoView> {
         val topicoView = service.atualizar(form)
         return ResponseEntity.ok(topicoView)
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
     }
