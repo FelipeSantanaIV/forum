@@ -3,6 +3,7 @@ package br.com.felipe.forum.service
 import br.com.felipe.forum.dto.AtualizacaoTopicoForm
 import br.com.felipe.forum.dto.TopicoForm
 import br.com.felipe.forum.dto.TopicoView
+import br.com.felipe.forum.exception.NotFoundException
 import br.com.felipe.forum.mapper.TopicoFormMapper
 import br.com.felipe.forum.mapper.TopicoViewMapper
 import br.com.felipe.forum.model.Topico
@@ -14,7 +15,8 @@ import kotlin.collections.ArrayList
 class TopicoService(
     private var topicos: List<Topico> = ArrayList(),
     private val topicoViewMapper: TopicoViewMapper,
-    private val topicoFormMapper: TopicoFormMapper
+    private val topicoFormMapper: TopicoFormMapper,
+    private val notFoundMessage: String = "Topico não encontrado"
     ) {
 
     fun listar(): List<TopicoView> {
@@ -25,7 +27,7 @@ class TopicoService(
     fun buscarPorId(id: Long): TopicoView {
         val topico = topicos.stream().filter { t ->
             t.id == id
-        }.findFirst().get()
+        }.findFirst().orElseThrow{NotFoundException(notFoundMessage)}
         return topicoViewMapper.map(topico)
     }
 
@@ -64,7 +66,7 @@ class TopicoService(
     fun deletar(id: Long) {
         val topico = topicos.stream().filter { t ->
             t.id == id
-        }.findFirst().get()
+        }.findFirst().orElseThrow{NotFoundException(notFoundMessage)}
         topicos = topicos.minus(topico)
     }
 }
