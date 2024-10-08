@@ -2,6 +2,7 @@ package br.com.felipe.forum.controller
 
 import br.com.felipe.forum.dto.AtualizacaoTopicoForm
 import br.com.felipe.forum.dto.TopicoForm
+import br.com.felipe.forum.dto.TopicoPorCategoriaDto
 import br.com.felipe.forum.dto.TopicoView
 import br.com.felipe.forum.service.TopicoService
 import jakarta.validation.Valid
@@ -68,5 +69,10 @@ class TopicoController(private val service: TopicoService) {
     @CacheEvict(value = ["listaTopicos"], allEntries = true)
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
+    }
+
+    @GetMapping("/relatorio")
+    fun relatorioTopicos(): List<TopicoPorCategoriaDto>{
+        return service.relatorio()
     }
 }

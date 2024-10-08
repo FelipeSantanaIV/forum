@@ -2,6 +2,7 @@ package br.com.felipe.forum.service
 
 import br.com.felipe.forum.dto.AtualizacaoTopicoForm
 import br.com.felipe.forum.dto.TopicoForm
+import br.com.felipe.forum.dto.TopicoPorCategoriaDto
 import br.com.felipe.forum.dto.TopicoView
 import br.com.felipe.forum.exception.NotFoundException
 import br.com.felipe.forum.mapper.TopicoFormMapper
@@ -21,6 +22,7 @@ class TopicoService(
     private val topicoFormMapper: TopicoFormMapper,
     private val notFoundMessage: String = "Topico não encontrado"
     ) {
+
 
     fun listar(
         nomeCurso: String?,
@@ -63,5 +65,9 @@ class TopicoService(
 
     fun deletar(id: Long) {
         repository.deleteById(id)
+    }
+
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return repository.relatorio()
     }
 }
