@@ -8,7 +8,6 @@ import jakarta.persistence.Id
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 
 @Entity
-@EnableAutoConfiguration
 data class Curso (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

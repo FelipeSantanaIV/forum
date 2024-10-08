@@ -7,7 +7,6 @@ import jakarta.persistence.Id
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 
 @Entity
-@EnableAutoConfiguration
 data class Usuario (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

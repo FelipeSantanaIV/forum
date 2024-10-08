@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import java.time.LocalDateTime
 
 @Entity
-@EnableAutoConfiguration
 data class Resposta (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
