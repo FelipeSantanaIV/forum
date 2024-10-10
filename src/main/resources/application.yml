@@ -17,3 +17,5 @@ spring:
     locations: classpath:db/migration  # Local padrão das migrations Flyway (pode ser alterado se necessário)
     baseline-on-migrate: true  # Isso garante que o Flyway reconheça o estado atual do banco se ele já tiver dados
     placeholder-replacement: true  # Para garantir que os placeholders sejam substituídos
+  jwt:
+    secret: ${JWT_SECRET}
