@@ -23,7 +23,7 @@ class JWTUtil(
 
     @PostConstruct
     fun init() {
-        key = Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8))
+        key = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256)
     }
 
     private val expiration: Long = 60000
