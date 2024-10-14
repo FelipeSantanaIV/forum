@@ -12,10 +12,6 @@ spring:
         show_sql: true
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
-  flyway:
-    enabled: true  # Habilita o Flyway
-    locations: classpath:db/migration  # Local padrão das migrations Flyway (pode ser alterado se necessário)
-    baseline-on-migrate: true  # Isso garante que o Flyway reconheça o estado atual do banco se ele já tiver dados
-    placeholder-replacement: true  # Para garantir que os placeholders sejam substituídos
+  flyway.locations.filesystem: db/migration
   jwt:
     secret: ${JWT_SECRET}
