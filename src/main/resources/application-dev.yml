@@ -1,9 +1,9 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/forum?allowPublicKeyRetrieval=true&useSSL=false
-    username: ${DB_USER}  # Certifique-se de que as variáveis de ambiente estejam configuradas
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://db:3306/forum?allowPublicKeyRetrieval=true&useSSL=false
+    username: root  # Certifique-se de que as variáveis de ambiente estejam configuradas
+    password: root_password
   jpa:
     hibernate:
       ddl-auto: none  # Evita que o Hibernate tente criar ou modificar o esquema automaticamente
