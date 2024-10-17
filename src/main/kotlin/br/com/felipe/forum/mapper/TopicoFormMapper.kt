@@ -5,6 +5,7 @@ import br.com.felipe.forum.model.Topico
 import br.com.felipe.forum.service.CursoService
 import br.com.felipe.forum.service.UsuarioService
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
 class TopicoFormMapper (private val cursoService: CursoService,
