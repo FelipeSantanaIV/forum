@@ -34,7 +34,6 @@ import org.springframework.web.util.UriComponentsBuilder
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    @Cacheable("listaTopicos")
     fun listar(
         @RequestParam(required = false) nomeCurso: String?,
         @PageableDefault(size = 10, sort = ["dataCriacao"], direction = Sort.Direction.DESC) paginacao: Pageable
@@ -49,7 +48,6 @@ class TopicoController(private val service: TopicoService) {
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = ["listaTopicos"], allEntries = true)
     fun cadastrar(
         @RequestBody @Valid form: TopicoForm,
         uriBuilder: UriComponentsBuilder): ResponseEntity<TopicoView>{
@@ -60,7 +58,6 @@ class TopicoController(private val service: TopicoService) {
 
     @PutMapping
     @Transactional
-    @CacheEvict(value = ["listaTopicos"], allEntries = true)
     fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm): ResponseEntity<TopicoView> {
         val topicoView = service.atualizar(form)
         return ResponseEntity.ok(topicoView)
@@ -68,7 +65,6 @@ class TopicoController(private val service: TopicoService) {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    @CacheEvict(value = ["listaTopicos"], allEntries = true)
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
     }
