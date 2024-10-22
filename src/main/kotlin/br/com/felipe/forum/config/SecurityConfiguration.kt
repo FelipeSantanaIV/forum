@@ -31,6 +31,8 @@ class SecurityConfiguration (
             .authorizeHttpRequests {
                 it
                     .requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_E_ESCRITA")
+                    .requestMatchers("/resposta").hasAuthority("LEITURA_E_ESCRITA")
+                    .requestMatchers("/relatorios").hasAuthority("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
                     .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()

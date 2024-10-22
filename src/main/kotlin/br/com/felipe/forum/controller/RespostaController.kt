@@ -3,6 +3,7 @@ package br.com.felipe.forum.controller
 import br.com.felipe.forum.dto.AtualizacaoRespostaForm
 import br.com.felipe.forum.dto.RespostaForm
 import br.com.felipe.forum.dto.RespostaView
+import br.com.felipe.forum.model.Resposta
 import br.com.felipe.forum.service.RespostaService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -22,9 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 class RespostaController (private val service: RespostaService) {
 
     @PostMapping
-    fun cadastrar(@PathVariable id: Long, @RequestBody @Valid dto: RespostaForm) {
-        service.cadastrar(dto,id)
-    }
+    fun cadastrar(@RequestBody @Valid resposta: Resposta) = service.cadastrar(resposta)
 
     @PutMapping
     fun atualizar(@RequestBody @Valid form: AtualizacaoRespostaForm): ResponseEntity<RespostaView> {
