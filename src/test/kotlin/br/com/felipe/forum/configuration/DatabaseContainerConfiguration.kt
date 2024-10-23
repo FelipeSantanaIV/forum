@@ -31,11 +31,12 @@ abstract class DatabaseContainerConfiguration {
         @DynamicPropertySource
         fun properties(registry: DynamicPropertyRegistry){
             registry.add("spring.datasource.url", mySqlContainer::getJdbcUrl)
-            registry.add("spring.datasource.password", mySqlContainer::getPassword)
             registry.add("spring.datasource.username", mySqlContainer::getUsername)
+            registry.add("spring.datasource.password", mySqlContainer::getPassword)
 
-            registry.add("spring.redis.host", redisContainer::getHost)
-            registry.add("spring.redis.port", redisContainer::getExposedPorts)
+
+            registry.add("spring.data.redis.host", redisContainer::getHost)
+            registry.add("spring.data.redis.port", redisContainer::getFirstMappedPort)
         }
     }
 }
