@@ -30,7 +30,7 @@ class SecurityConfiguration (
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_E_ESCRITA")
+                    .requestMatchers( "/topicos").hasAuthority("LEITURA_E_ESCRITA")
                     .requestMatchers("/resposta").hasAuthority("LEITURA_E_ESCRITA")
                     .requestMatchers("/relatorios").hasAuthority("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()

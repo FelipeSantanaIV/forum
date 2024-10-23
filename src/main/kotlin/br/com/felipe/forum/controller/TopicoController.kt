@@ -36,7 +36,7 @@ class TopicoController(private val service: TopicoService) {
     @GetMapping
     fun listar(
         @RequestParam(required = false) nomeCurso: String?,
-        @PageableDefault(size = 10, sort = ["dataCriacao"], direction = Sort.Direction.DESC) paginacao: Pageable
+        @PageableDefault(size = 5, sort = ["dataCriacao"], direction = Sort.Direction.DESC) paginacao: Pageable
     ): Page<TopicoView>{
         return service.listar(nomeCurso, paginacao)
     }

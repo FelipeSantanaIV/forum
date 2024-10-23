@@ -1,5 +1,6 @@
 package br.com.felipe.forum.integration
 
+import br.com.felipe.forum.configuration.DatabaseContainerConfiguration
 import br.com.felipe.forum.dto.TopicoPorCategoriaDto
 import br.com.felipe.forum.model.TopicoTest
 import br.com.felipe.forum.repository.TopicoRepository
@@ -9,38 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.data.domain.PageRequest
-import org.springframework.test.context.DynamicPropertyRegistry
-import org.springframework.test.context.DynamicPropertySource
-import org.testcontainers.containers.MySQLContainer
-import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
-@DataJpaTest
+
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class TopicoRepositoryTest {
+class TopicoRepositoryTest: DatabaseContainerConfiguration(){
 
     @Autowired
     private lateinit var topicoRepository: TopicoRepository
 
     private val topico = TopicoTest.build()
-
-    companion object {
-        @Container
-        private val mySqlContainer = MySQLContainer<Nothing>("mysql:8.0").apply {
-            withDatabaseName("testedb")
-            withUsername("felipe")
-            withPassword("123456")
-        }
-
-        @JvmStatic
-        @DynamicPropertySource
-        fun properties(registry: DynamicPropertyRegistry){
-            registry.add("spring.datasource.url", mySqlContainer::getJdbcUrl)
-            registry.add("spring.datasource.password", mySqlContainer::getPassword)
-            registry.add("spring.datasource.username", mySqlContainer::getUsername)
-        }
-    }
 
     @Test
     fun `deve gerar um relatorio` () {
