@@ -38,7 +38,6 @@ class TopicoControllerTest: DatabaseContainerConfiguration() {
 
     @BeforeEach
     fun setup(){
-        MockitoAnnotations.openMocks(this)
         token = gerarToken()
 
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
@@ -54,7 +53,7 @@ class TopicoControllerTest: DatabaseContainerConfiguration() {
     @Test
     fun `deve retornar o código 200 quando chamar topicos com token`() {
         mockMvc.get(RECURSO) {
-            headers { token?.let { this.setBearerAuth(it) } }
+            headers { token?.let { setBearerAuth(it) } }
         }.andExpect { status { isOk() } }
 
 
@@ -62,9 +61,8 @@ class TopicoControllerTest: DatabaseContainerConfiguration() {
 
     @Test
     fun `deve retornar codigo 200 quando chamar tópico por id com token`() {
-        println("URL chamada: ${RECURSO_ID.format(1)}")
         mockMvc.get(RECURSO_ID.format("2")) {
-            headers { token?.let { this.setBearerAuth(it) } }
+            headers { token?.let { setBearerAuth(it) } }
         }.andExpect { status { isOk() } }
     }
 
